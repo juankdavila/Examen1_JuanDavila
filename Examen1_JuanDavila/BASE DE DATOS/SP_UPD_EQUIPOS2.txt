@@ -1,0 +1,27 @@
+CREATE OR REPLACE FUNCTION public."SP_UPD_EQUIPOS"(
+	pi_id_equipo integer,
+	pv_nombre_equipo character varying,
+	pv_descripcion character varying,
+	pv_ubicacion character varying,
+	pv_objetivo character varying,
+	pv_contacto character varying,
+	pv_estado character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+	
+	UPDATE EQUIPOS
+	SET nombre_equipo=pv_nombre_equipo,
+	descripcion=pv_descripcion,
+	ubicacion=pv_ubicacion,
+	objetivo=pv_objetivo,
+	contacto=pv_contacto,
+	estado=pv_estado
+	
+	WHERE id_equipo=pi_id_equipo;
+
+END;
+$BODY$;

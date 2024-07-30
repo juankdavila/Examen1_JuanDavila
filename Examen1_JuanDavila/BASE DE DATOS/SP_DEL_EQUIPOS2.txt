@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION public."SP_DEL_EQUIPOS"(
+	pi_id_equipo integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+	
+	UPDATE EQUIPOS
+	SET estado = 'I'
+	WHERE id_equipo=pi_id_equipo;
+
+END;
+$BODY$;

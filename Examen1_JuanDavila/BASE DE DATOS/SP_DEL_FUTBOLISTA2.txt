@@ -1,0 +1,15 @@
+CREATE OR REPLACE FUNCTION public."SP_DEL_FUTBOLISTA"(
+	pi_id_futbolista integer)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+BEGIN
+	
+	UPDATE FUTBOLISTA
+	SET estado = 'I'
+	WHERE id_futbolista=pi_id_futbolista; 
+
+END;
+$BODY$;

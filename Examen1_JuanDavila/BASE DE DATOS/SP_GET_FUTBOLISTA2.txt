@@ -1,0 +1,16 @@
+CREATE OR REPLACE FUNCTION public."SP_GET_FUTBOLISTA"(
+	pi_id_futbolista integer)
+    RETURNS SETOF futbolista 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+	RETURN QUERY
+	SELECT * FROM FUTBOLISTA
+	WHERE id_futbolista=pi_id_futbolista;
+
+END;
+$BODY$;

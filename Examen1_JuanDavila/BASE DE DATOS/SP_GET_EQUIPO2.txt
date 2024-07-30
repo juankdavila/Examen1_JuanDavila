@@ -1,0 +1,16 @@
+CREATE OR REPLACE FUNCTION public."SP_GET_EQUIPO"(
+	pi_id_equipo integer)
+    RETURNS SETOF equipos 
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+    ROWS 1000
+
+AS $BODY$
+BEGIN
+	RETURN QUERY
+	SELECT * FROM EQUIPOS
+	WHERE id_equipo=pi_id_equipo;
+
+END;
+$BODY$;

@@ -1,0 +1,24 @@
+CREATE OR REPLACE FUNCTION public."SP_INS_FUTBOLISTA"(
+	pv_nombre character varying,
+	pv_apellidos character varying,
+	pv_edad character varying,
+	pv_direccion character varying,
+	pv_mail character varying,
+	pd_fecha_nacimiento date,
+	pv_estado character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+	contador_id integer;
+BEGIN
+	SELECT COALESCE(MAX(id_futbolista), 0) + 1 INTO contador_id
+    FROM FUTBOLISTA;
+	
+	INSERT INTO FUTBOLISTA(id_futbolista,nombre,apellidos,edad,mail,direccion,fecha_nacimiento,estado)
+	VALUES(contador_id,pv_nombre,pv_apellidos,pv_edad,pv_direccion,pv_mail,pd_fecha_nacimiento,'A');
+
+END;
+$BODY$;

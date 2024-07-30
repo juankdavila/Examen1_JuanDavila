@@ -1,0 +1,23 @@
+CREATE OR REPLACE FUNCTION public."SP_INS_EQUIPOS"(
+	pv_nombre_equipo character varying,
+	pv_descripcion character varying,
+	pv_ubicacion character varying,
+	pv_objetivo character varying,
+	pv_contacto character varying,
+	pv_estado character varying)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE
+	contador_id integer;
+BEGIN
+	SELECT COALESCE(MAX(id_equipo), 0) + 1 INTO contador_id
+    FROM EQUIPOS;
+	
+	INSERT INTO EQUIPOS(id_equipo,nombre_equipo,descripcion,ubicacion,objetivo,contacto,estado)
+	VALUES(contador_id,pv_nombre_equipo,pv_descripcion,pv_ubicacion,pv_objetivo,pv_contacto,'A');
+
+END;
+$BODY$;

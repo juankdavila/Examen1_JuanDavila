@@ -1,0 +1,28 @@
+CREATE OR REPLACE FUNCTION public."SP_UPD_FUTBOLISTA"(
+	pi_id_futbolista integer,
+	pv_nombre character varying,
+	pv_apellidos character varying,
+	pv_edad character varying,
+	pv_direccion character varying,
+	pv_mail character varying,
+	pd_fecha_nacimiento date)
+    RETURNS void
+    LANGUAGE 'plpgsql'
+    COST 100
+    VOLATILE PARALLEL UNSAFE
+AS $BODY$
+DECLARE 
+	CONTADOR_ID INTEGER;
+BEGIN
+	
+	UPDATE FUTBOLISTA
+	SET nombre=pv_nombre,
+	apellidos =pv_apellidos,
+	edad =pv_edad,
+	direccion=pv_direccion,
+	mail=pv_mail,
+	fecha_nacimiento=pd_fecha_nacimiento
+	WHERE id_futbolista=pi_id_futbolista;
+
+END;
+$BODY$;
